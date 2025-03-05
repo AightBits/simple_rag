@@ -31,8 +31,11 @@ def query_llm(context, question):
     payload = {
         "model": OPENAI_MODEL,
         "messages": [
-            {"role": "system", "content": "You are an AI assistant using retrieved documents to answer questions."},
-            {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {question}"}
+            {"role": "system", "content": "You are an AI assistant answering questions based on the provided context. Your response should be as complete
+ as possible, integrating both direct and related details. If the context includes relationships, connections, or additional facts, make sure to include
+them."},
+            {"role": "user", "content": f"Based on the following context, provide a complete response. Ensure all relevant details, relationships, and co
+nnections are included:\n\n{context}\n\nQuestion: {question}"}
         ]
     }
     response = requests.post(OPENAI_API_URL, json=payload, headers=headers)
